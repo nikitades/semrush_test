@@ -14,7 +14,7 @@ module.exports = {
             template: webpack_root + '/../app/index.html'
         }),
         new CleanWebpackPlugin(['dist'], {
-            root:     webpack_root + '/../'
+            root: webpack_root + '/../'
         })
     ]
 };
