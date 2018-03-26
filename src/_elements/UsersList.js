@@ -43,7 +43,6 @@ export default class UsersList extends React.Component {
         let pageStart, pageEnd, offset = 5, page = this.state.page, max = this.maxPage;
         pageStart = page - offset < 0 ? 0 : page - offset;
         pageEnd = +page + offset > +max ? max : +page + offset;
-        if (page - offset < 0) pageEnd -= (page - offset);
         for (let i = pageStart; i <= pageEnd; i++) {
             pages.push(<PaginatorPage key={i} currentPage={this.state.page} i={i} setPage={this.setPage.bind(this)}/>)
         }

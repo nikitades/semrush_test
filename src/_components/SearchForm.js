@@ -10,7 +10,7 @@ class SearchForm extends React.Component {
                 <div className="form-group">
                     <label htmlFor="searchStr">Search</label>
                     <input type="text" className="form-control" id="searchStr" placeholder="John Doe"
-                           onChange={this.onChange.bind(this)}/>
+                           onChange={this.onChange.bind(this)} value={this.props.searchStr}/>
                     <small id="searchStrHelp" className="form-text text-muted">There is no need to press enter, the form
                         updates instantly
                     </small>
@@ -26,7 +26,7 @@ class SearchForm extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        searchStr: state.searchStr
+        searchStr: state.filter.searchStr
     }
 };
 

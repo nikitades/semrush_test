@@ -16,7 +16,7 @@ const worker = SWorker.create(
                     }) : [];
                     let condOccupation = !!parameters.occupation ? user.company.split(' ').filter(word => {
                         let okCount = 0;
-                        for (let i in occupationRegexes) if (word.match(occupationRegexes[i])) okCount++;
+                        for (let i in occupationRegexes) if (!!word && word.match(occupationRegexes[i])) okCount++;
                         return !!okCount;
                     }).length > 0 : true;
 
@@ -25,7 +25,7 @@ const worker = SWorker.create(
                     }) : [];
                     let condSearchStr = !!parameters.searchStr ? user.name.split(' ').filter(word => {
                         let okCount = 0;
-                        for (let i in searchStrRegexes) if (word.match(searchStrRegexes[i])) okCount++;
+                        for (let i in searchStrRegexes) if (!!word && word.match(searchStrRegexes[i])) okCount++;
                         return !!okCount;
                     }).length > 0 : true;
 
