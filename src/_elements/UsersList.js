@@ -25,14 +25,9 @@ export default class UsersList extends React.Component {
         return <div className="mt-5">
             <nav aria-label="Page navigation example">
                 <ul className="pagination">
-                    <li className={"page-item" + ((!!+this.state.page) ? '' : ' disabled')}>
-                        <a data-page={+this.state.page - 1} onClick={this.setPage.bind(this)}
-                           className="page-link" href="#">Previous</a>
-                    </li>
+                    {this.getPaginatorPrevButton()}
                     {this.getPaginatorPages()}
-                    <li className={"page-item" + ((+this.state.page + 1) > this.maxPage ? ' disabled' : '')}><a
-                        data-page={+this.state.page + 1} onClick={this.setPage.bind(this)}
-                        className="page-link" href="#">Next</a></li>
+                    {this.getPaginatorNextButton()}
                 </ul>
             </nav>
         </div>;
@@ -47,6 +42,19 @@ export default class UsersList extends React.Component {
             pages.push(<PaginatorPage key={i} currentPage={this.state.page} i={i} setPage={this.setPage.bind(this)}/>)
         }
         return pages;
+    }
+
+    getPaginatorPrevButton() {
+        return this.maxPage === -1 ? null : <li className={"page-item" + ((!!+this.state.page) ? '' : ' disabled')}>
+            <a data-page={+this.state.page - 1} onClick={this.setPage.bind(this)}
+               className="page-link" href="#">Previous</a>
+        </li>
+    }
+
+    getPaginatorNextButton() {
+        return this.maxPage === -1 ? null : <li className={"page-item" + ((+this.state.page + 1) > this.maxPage ? ' disabled' : '')}><a
+            data-page={+this.state.page + 1} onClick={this.setPage.bind(this)}
+            className="page-link" href="#">Next</a></li>
     }
 
     getContent() {
