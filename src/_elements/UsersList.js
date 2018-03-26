@@ -51,7 +51,7 @@ export default class UsersList extends React.Component {
         return <div>
             {this.props.items.filter((item, i) => {
                 return i >= pageSize * this.state.page && i <= pageSize * (+this.state.page + 1);
-            }).map((item, i) => <User key={i} user={item}/>)}
+            }).map((item, i) => <User setUserById={this.props.setUserById} key={i} user={item}/>)}
             {this.getPaginator()}
         </div>;
     }

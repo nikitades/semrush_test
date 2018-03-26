@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {registerError} from "../actionCreators/errorActions";
-import store from "../getStore";
+import store from "../helpers/getStore";
 
 class ErrorReporter extends React.Component {
     componentDidCatch(e) {

@@ -32,3 +32,16 @@ export function setOccupation(occupation) {
         payload: occupation
     }
 }
+
+export function resetFilter() {
+    return {
+        type: 'RESET_FILTER'
+    }
+}
+
+export function regenerateFilter(oldFilter) {
+    return {
+        type: 'REGENERATE_FILTER',
+        payload: oldFilter
+    }
+}

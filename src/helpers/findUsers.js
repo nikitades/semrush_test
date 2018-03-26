@@ -1,6 +1,6 @@
-import usersDB from './friends';
+import usersDB from '../friends';
 import worker from './getWorker';
-import ErrorReporter from "./_containers/ErrorReporter";
+import ErrorReporter from "../_containers/ErrorReporter";
 
 /**
  * Parameters is an object of type: {

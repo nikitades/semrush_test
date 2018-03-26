@@ -1,4 +1,5 @@
 const defaultState = {
+    searchStr: null,
     age: {
         from: null,
         to: null
@@ -41,6 +42,10 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 occupation: action.payload
-            }
+            };
+        case 'RESET_FILTER':
+            return defaultState;
+        case 'REGENERATE_FILTER':
+            return action.payload;
     }
 }

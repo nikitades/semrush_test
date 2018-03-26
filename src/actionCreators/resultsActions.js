@@ -1,12 +1,5 @@
-import findUsers from "../findUsers";
-import store from '../getStore';
-
-export function goToUser(id) {
-    return {
-        type: 'GO_TO_USER',
-        payload: id
-    }
-}
+import findUsers from "../helpers/findUsers";
+import store from '../helpers/getStore';
 
 const UPDATE_INTERVAL = 1000;
 let filterUpdatingTimeout = setTimeout(null, 0);
@@ -14,7 +7,14 @@ let lastParameters;
 let lastResult;
 
 export function updateSearchFilter() {
-    const parameters = store.getState().filter;
+    let friendsParam = store.getState().currentUser ? {
+        inFriendsList: store.getState().currentUser.friends
+    } : {};
+    const parameters = {
+        ...store.getState().filter,
+        ...friendsParam
+    };
+    window.history.replaceState({filter: parameters}, document.title);
     return async dispatch => {
         clearTimeout(filterUpdatingTimeout);
         await dispatch({
@@ -26,6 +26,7 @@ export function updateSearchFilter() {
             payload: lastResult
         });
         filterUpdatingTimeout = setTimeout(async () => {
+            console.log('here')
             lastParameters = strParameters;
             let result = lastResult = await findUsers(parameters);
             dispatch({

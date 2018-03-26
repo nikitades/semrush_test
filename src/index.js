@@ -1,15 +1,14 @@
 import React from 'react';
 import {render} from 'react-dom';
-import App from './App';
+import App from './_containers/App';
 import {Provider} from 'react-redux';
 import 'bootstrap-css-only';
-import store from './getStore';
-import {HashRouter} from 'react-router-dom';
+import store from './helpers/getStore';
+import loadContent from "./helpers/loadContent";
 
-window.onpopstate = state => console.log(state);
+loadContent();
+window.onpopstate = loadContent;
 
 render(<Provider store={store}>
-    <HashRouter>
-        <App/>
-    </HashRouter>
+    <App/>
 </Provider>, document.getElementById('app'));

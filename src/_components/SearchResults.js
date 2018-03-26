@@ -1,33 +1,28 @@
 import React from "react";
-import {goToUser, updateSearchFilter} from "../actionCreators/resultsActions";
+import {updateSearchFilter} from "../actionCreators/resultsActions";
 import {connect} from "react-redux";
-import User from "../_elements/User";
-import SvgSpinner from '../resources/spinnerIcon.svg';
 import UsersList from "../_elements/UsersList";
+import LoadingScreen from "../_elements/LoadingScreen";
+import navigateTo from "../helpers/navigateTo";
 
 class SearchResults extends React.Component {
     componentDidMount() {
         this.props.updateSearchFilter();
     }
 
-    getLoadingScreen() {
-        return <div>
-            <div className="text-center mt-5">
-                <h5><i>Fetching items...</i></h5>
-                <SvgSpinner/>
-            </div>
-        </div>;
-    }
-
     getUsersList() {
         return <div className="mt-5 mb-5">
-            <UsersList items={this.props.results}/>
+            <UsersList items={this.props.results} setUserById={this.setUserById.bind(this)}/>
         </div>
+    }
+
+    setUserById(id) {
+        navigateTo('#/person/' + id);
     }
 
     render() {
         return <div>
-            {this.props.results === null ? this.getLoadingScreen() : this.getUsersList()}
+            {this.props.results === null ? <LoadingScreen/> : this.getUsersList()}
         </div>;
     }
 }
@@ -40,7 +35,6 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = dispatch => {
     return {
-        goToUser: id => dispatch(goToUser(id)),
         updateSearchFilter: () => dispatch(updateSearchFilter())
     }
 };

@@ -25,9 +25,9 @@ class Filter extends React.Component {
                         <span className="input-group-text">Age</span>
                     </div>
                     <input onChange={this.setAgeFrom.bind(this)} type="number" min="0" className="form-control"
-                           placeholder="from..."/>
+                           placeholder="from..." value={this.props.filter.age.from || ""}/>
                     <input onChange={this.setAgeTo.bind(this)} type="number" min="0" className="form-control"
-                           placeholder="to..."/>
+                           placeholder="to..." value={this.props.filter.age.to || ""}/>
                 </div>
             </div>
             <div className="col-12 col-md-4 mt-2 mt-md-0">
@@ -36,7 +36,7 @@ class Filter extends React.Component {
                         <span className="input-group-text">Works for</span>
                     </div>
                     <input onChange={this.setOccupation.bind(this)} type="text" className="form-control"
-                           placeholder="Horns & Hooves..."/>
+                           placeholder="Horns & Hooves..." value={this.props.filter.occupation || ""}/>
                 </div>
             </div>
         </div>;

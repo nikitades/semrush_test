@@ -5,7 +5,7 @@ import {updateSearchFilter} from "../actionCreators/resultsActions";
 
 class SearchForm extends React.Component {
     render() {
-        return <div>
+        return <div className="mt-5">
             <form>
                 <div className="form-group">
                     <label htmlFor="searchStr">Search</label>
