@@ -1,8 +1,8 @@
-#The test social network app
+# The test social network app
 
 A sample app to demonstrate my skills in React, Redux and JS in general.
 
-##Installation notes
+## Installation notes
 
 1. Checkout this repo to the desired folder
 2. Run `npm install` in this folder
