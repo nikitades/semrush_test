@@ -1,4 +1,4 @@
-import usersDB from '../friends';
+import usersDB from '../resources/friends';
 import worker from './getWorker';
 import ErrorReporter from "../_containers/ErrorReporter";
 

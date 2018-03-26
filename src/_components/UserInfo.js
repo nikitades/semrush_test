@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import navigateTo from "../helpers/navigateTo";
 
-class ClientInfo extends React.Component {
+class UserInfo extends React.Component {
     getUserInfo() {
         return <div className="row">
             <div className="col-11">
@@ -15,7 +15,7 @@ class ClientInfo extends React.Component {
                 </div>
             </div>
             <div className="col-1">
-                <a onClick={this.resetUser.bind(this)} href="#" className="btn btn-light">✖</a>
+                <a onClick={this.resetUser.bind(this)} href="#" className="btn btn-light">✕</a>
             </div>
         </div>;
     }
@@ -38,4 +38,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps)(ClientInfo);
+export default connect(mapStateToProps)(UserInfo);

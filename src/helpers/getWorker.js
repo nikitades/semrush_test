@@ -10,7 +10,16 @@ const worker = SWorker.create(
                     let condAgeFrom = (!!parameters.age && !!parameters.age.from) ? user.age >= parameters.age.from : true;
                     let condAgeTo = !!parameters.age && !!parameters.age.to ? user.age <= parameters.age.to : true;
                     let condGender = !!parameters.gender ? user.gender === parameters.gender : true;
-                    let condOccupation = !!parameters.occupation ? user.company === parameters.occupation : true;
+
+                    let occupationRegexes = !!parameters.occupation ? parameters.occupation.split(' ').map(word => {
+                        return new RegExp(word, 'i');
+                    }) : [];
+                    let condOccupation = !!parameters.occupation ? user.company.split(' ').filter(word => {
+                        let okCount = 0;
+                        for (let i in occupationRegexes) if (word.match(occupationRegexes[i])) okCount++;
+                        return !!okCount;
+                    }).length > 0 : true;
+
                     let searchStrRegexes = !!parameters.searchStr ? parameters.searchStr.split(' ').map(word => {
                         return new RegExp(word, 'i');
                     }) : [];
@@ -19,6 +28,7 @@ const worker = SWorker.create(
                         for (let i in searchStrRegexes) if (word.match(searchStrRegexes[i])) okCount++;
                         return !!okCount;
                     }).length > 0 : true;
+
                     let condFriends = !!parameters.inFriendsList ? parameters.inFriendsList.indexOf(user.id) !== -1 : true;
                     return condID && condAgeFrom && condAgeTo && condGender && condOccupation && condSearchStr && condFriends;
                 });

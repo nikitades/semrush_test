@@ -25,13 +25,14 @@ export default class UsersList extends React.Component {
         return <div className="mt-5">
             <nav aria-label="Page navigation example">
                 <ul className="pagination">
-                    {(!!+this.state.page) ? (
-                        <li className="page-item"><a data-page={+this.state.page - 1} onClick={this.setPage.bind(this)}
-                                                     className="page-link" href="#">Previous</a></li>) : null}
+                    <li className={"page-item" + ((!!+this.state.page) ? '' : ' disabled')}>
+                        <a data-page={+this.state.page - 1} onClick={this.setPage.bind(this)}
+                           className="page-link" href="#">Previous</a>
+                    </li>
                     {this.getPaginatorPages()}
-                    {(+this.state.page + 1) > this.maxPage ? null : (
-                        <li className="page-item"><a data-page={+this.state.page + 1} onClick={this.setPage.bind(this)}
-                                                     className="page-link" href="#">Next</a></li>)}
+                    <li className={"page-item" + ((+this.state.page + 1) > this.maxPage ? ' disabled' : '')}><a
+                        data-page={+this.state.page + 1} onClick={this.setPage.bind(this)}
+                        className="page-link" href="#">Next</a></li>
                 </ul>
             </nav>
         </div>;
@@ -39,19 +40,28 @@ export default class UsersList extends React.Component {
 
     getPaginatorPages() {
         let pages = [];
-        let pageStart = (+this.state.page - 5 > 0) ? +this.state.page - 5 : 0;
-        let pageEnd = (+this.state.page + 5 > +this.maxPage) ? this.maxPage : +this.state.page + 5;
+        let pageStart, pageEnd, offset = 5, page = this.state.page, max = this.maxPage;
+        pageStart = page - offset < 0 ? 0 : page - offset;
+        pageEnd = +page + offset > +max ? max : +page + offset;
+        if (page - offset < 0) pageEnd -= (page - offset);
         for (let i = pageStart; i <= pageEnd; i++) {
             pages.push(<PaginatorPage key={i} currentPage={this.state.page} i={i} setPage={this.setPage.bind(this)}/>)
         }
         return pages;
     }
 
+    getContent() {
+        if (this.props.items.length === 0) return <div className="text-center mt-5">
+            <h5><i>{this.props.text || "No users found"}</i></h5>
+        </div>;
+        return this.props.items.filter((item, i) => {
+            return i >= pageSize * this.state.page && i <= pageSize * (+this.state.page + 1);
+        }).map((item, i) => <User setUserById={this.props.setUserById} key={i} user={item}/>);
+    }
+
     render() {
         return <div>
-            {this.props.items.filter((item, i) => {
-                return i >= pageSize * this.state.page && i <= pageSize * (+this.state.page + 1);
-            }).map((item, i) => <User setUserById={this.props.setUserById} key={i} user={item}/>)}
+            {this.getContent()}
             {this.getPaginator()}
         </div>;
     }

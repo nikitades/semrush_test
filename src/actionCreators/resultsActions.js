@@ -26,7 +26,6 @@ export function updateSearchFilter() {
             payload: lastResult
         });
         filterUpdatingTimeout = setTimeout(async () => {
-            console.log('here')
             lastParameters = strParameters;
             let result = lastResult = await findUsers(parameters);
             dispatch({

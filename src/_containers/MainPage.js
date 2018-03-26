@@ -7,7 +7,8 @@ import SearchResults from "../_components/SearchResults";
 class MainPage extends React.Component {
     render () {
         return <div className="container">
-            <h1>The Social Network Test App</h1>
+            <h1>TUSNTA</h1>
+            <small  className="text-muted">The Ultimate Social Network Test App</small>
             <SearchForm/>
             <Filter/>
             <SearchResults/>
